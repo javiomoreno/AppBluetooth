@@ -1,2 +1,0 @@
-# AppBluetooth
-App Bluetooth

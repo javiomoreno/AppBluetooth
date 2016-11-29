@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">BluetoothScanner</string>
+    <string name="app_name">PrintFiles</string>
+    <string name="action_buscarDispositivos">Buscar Dispositivos</string>
+    <string name="action_buscarArchivo">Buscar Archivo</string>
+    <string name="action_imprimirArchivo">Imprimir</string>
+    <string name="title_activity_explorador">Explorador</string>
     <string name="button_connect">Connect</string>
     <string name="button_disconnect">Disconnect</string>
-    <string name="title_devices">Devices</string>
-    <string name="action_settings">Settings</string>
-    <string name="scan">Scan</string>
+    <string name="title_devices">Dispositivos</string>
+    <string name="scan">Buscar</string>
 </resources>

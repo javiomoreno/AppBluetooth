@@ -1,4 +1,4 @@
-package com.example.javiermoreno.appbluetooth;
+package com.example.javiermoreno.appexporerfiles;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.javiermoreno.appbluetooth", appContext.getPackageName());
+        assertEquals("com.example.javiermoreno.appexporerfiles", appContext.getPackageName());
     }
 }

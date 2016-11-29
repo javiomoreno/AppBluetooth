@@ -10,7 +10,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_devices"
         android:textColor="#000"
-        android:textSize="60dp"
+        android:textSize="24sp"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="10dp"
@@ -20,17 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#000"/>
+
+
     <ToggleButton
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/scan"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff"
-        android:textSize="40dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:id="@+id/scan"
         android:layout_gravity="center_horizontal"
-        android:textOn="Scanning..."
-        android:textOff="Scan" />
+        android:textOn="Buscando..."
+        android:textOff="Buscar"/>
 
     <ListView android:id="@android:id/list" android:layout_width="match_parent"
         android:layout_height="match_parent"

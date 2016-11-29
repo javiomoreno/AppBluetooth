@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.javiermoreno.appexporerfiles.MainActivity">
+    <item
+        android:id="@+id/action_buscarDispositivos"
+        android:orderInCategory="100"
+        android:title="@string/action_buscarDispositivos"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_buscarArchivo"
+        android:orderInCategory="100"
+        android:title="@string/action_buscarArchivo"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_imprimirArchivo"
+        android:orderInCategory="100"
+        android:title="@string/action_imprimirArchivo"
+        app:showAsAction="never" />
+</menu>

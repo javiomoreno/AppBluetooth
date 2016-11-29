@@ -1,4 +1,4 @@
-package com.example.javiermoreno.appbluetooth;
+package com.example.javiermoreno.appexporerfiles;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import java.util.List;
 
