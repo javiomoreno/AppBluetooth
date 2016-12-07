@@ -54,8 +54,8 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/btnImprimir"
         android:background="@drawable/black"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,19 +75,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:text="Imprimir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnImprimir"
-        android:visibility="visible"
-        android:drawableLeft="@android:drawable/ic_menu_gallery"
-        android:layout_marginRight="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <TextView
         android:text="Cantidad de copias"
         android:layout_width="wrap_content"
@@ -95,15 +82,32 @@
         android:id="@+id/textView11"
         android:layout_alignBaseline="@+id/btnImprimir"
         android:layout_alignBottom="@+id/btnImprimir"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/textUbicacion"
+        android:layout_toEndOf="@+id/textUbicacion"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp" />
 
     <NumberPicker
         android:id="@+id/numeroCopias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
         android:layout_below="@+id/scrollView1"
         android:layout_toRightOf="@+id/textView11"
         android:layout_toEndOf="@+id/textView11" />
+
+    <Button
+        android:text="Imprimir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnImprimir"
+        android:visibility="visible"
+        android:drawableLeft="@android:drawable/ic_menu_gallery"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/numeroCopias"
+        android:layout_toEndOf="@+id/numeroCopias"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp" />
 
 </RelativeLayout>

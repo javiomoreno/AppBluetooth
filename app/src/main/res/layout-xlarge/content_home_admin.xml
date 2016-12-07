@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_home_admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.javiermoreno.appexporerfiles.HomeAdmin"
+    tools:showIn="@layout/activity_home_admin">
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="Configuración"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView2"
+                android:textSize="24sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000"
+                android:layout_below="@+id/textView2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:elevation="1dp" />
+
+
+            <TextView
+                android:text="Rutas de archivos PRM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9"
+                android:textSize="18sp"
+                android:layout_below="@+id/view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:text="Ruta Destino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView4"
+                android:layout_below="@+id/claveActual"
+                android:layout_alignLeft="@+id/claveActual"
+                android:layout_alignStart="@+id/claveActual"
+                android:layout_marginLeft="50dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_input_tablet"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_below="@+id/textView4"
+                android:layout_alignLeft="@+id/textView4"
+                android:layout_alignStart="@+id/textView4"
+                android:layout_marginTop="10dp"
+                android:id="@+id/rutaDestino"
+                android:background="@drawable/black"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"/>
+
+            <TextView
+                android:text="Ruta Origen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/view"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="50dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_input_tablet"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/rutaOrigen"
+                android:layout_below="@+id/textView5"
+                android:layout_alignLeft="@+id/rutaDestino"
+                android:layout_alignStart="@+id/rutaDestino"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/black"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"/>
+
+            <Button
+                android:text="Cambiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cambiarRutas"
+                android:layout_below="@+id/rutaDestino"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal|center"
+                android:layout_gravity="center_horizontal" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000"
+                android:elevation="1dp"
+                android:layout_below="@+id/cambiarRutas"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Cambiar clave de administrador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView10"
+                android:textSize="18sp"
+                android:layout_below="@+id/view2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:text="Clave Actual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textView10"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="50dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:ems="10"
+                android:layout_marginTop="10dp"
+                android:id="@+id/claveActual"
+                android:layout_below="@+id/textView3"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/black"
+                android:layout_height="@dimen/dimen_input_tablet"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:text="Nueva Clave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7"
+                android:layout_below="@+id/rutaOrigen"
+                android:layout_alignLeft="@+id/nuevaClave"
+                android:layout_alignStart="@+id/nuevaClave"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_input_tablet"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/nuevaClave"
+                android:layout_below="@+id/textView7"
+                android:layout_alignLeft="@+id/rutaOrigen"
+                android:layout_alignStart="@+id/rutaOrigen"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/black"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"/>
+
+            <TextView
+                android:text="Confirmación de clave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:layout_below="@+id/nuevaClave"
+                android:layout_alignLeft="@+id/confirmacionClave"
+                android:layout_alignStart="@+id/confirmacionClave"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_input_tablet"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/confirmacionClave"
+                android:background="@drawable/black"
+                android:layout_below="@+id/textView8"
+                android:layout_alignLeft="@+id/nuevaClave"
+                android:layout_alignStart="@+id/nuevaClave"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"/>
+
+            <Button
+                android:text="Cambiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCambiarClave"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/confirmacionClave"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
