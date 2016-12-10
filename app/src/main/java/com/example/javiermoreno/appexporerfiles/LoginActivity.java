@@ -28,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.feduro);
+
         btnLogin = (Button) findViewById(R.id.btn_login);
         textClave = (EditText) findViewById(R.id.textClave);
 
@@ -69,10 +72,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if (id == R.id.action_buscarArchivo) {
             irExplorador();
-        }
-
-        if (id == R.id.action_buscarDispositivos) {
-            irBuscarDispositivos();
         }
 
         return super.onOptionsItemSelected(item);

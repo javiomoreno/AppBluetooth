@@ -18,7 +18,7 @@ public class DeviceItem {
     }
 
     public String getAddress() {
-        return "MAC: "+address;
+        return address;
     }
 
     public void setDeviceName(String deviceName) {

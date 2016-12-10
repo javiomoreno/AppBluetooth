@@ -4,8 +4,20 @@
     tools:context="com.example.javiermoreno.appexporerfiles.ListActivity">
 
     <item
+        android:id="@+id/action_iniciarSesion"
+        android:orderInCategory="100"
+        android:title="@string/action_iniciarSesion"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_buscarArchivo"
         android:orderInCategory="100"
         android:title="@string/action_buscarArchivo"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_imprimirArchivo"
+        android:orderInCategory="100"
+        android:title="@string/action_imprimirArchivo"
         app:showAsAction="never" />
 </menu>

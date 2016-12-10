@@ -1,5 +1,6 @@
 package com.example.javiermoreno.appexporerfiles;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,11 +31,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void irBuscarDispositivos(){
-        Intent i = new Intent(this, ListActivity.class);
-        startActivity(i);
-    }
-
     public void irIniciarSesion(){
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
@@ -43,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> listaNombresArchivos;
     private List<String> listaRutasArchivos;
+    private List<String> listaRutasArchivos2;
     private ArrayAdapter<String> adaptador;
     private String directorioRaiz;
     private TextView carpetaActual;
@@ -56,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_explorador);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.feduro);
 
         carpetaActual = (TextView) findViewById(R.id.rutaActual);
         listView = (ListView) findViewById(R.id.listFiles);
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         carpetaActual.setText("Estas en: " + rutaDirectorio);
         listaNombresArchivos = new ArrayList<String>();
         listaRutasArchivos = new ArrayList<String>();
+        listaRutasArchivos2 = new ArrayList<String>();
         File directorioActual = new File(rutaDirectorio);
         File[] listaArchivos = directorioActual.listFiles();
 
@@ -104,10 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = x; i < listaRutasArchivos.size(); i++) {
             File archivo = new File(listaRutasArchivos.get(i));
-            if (archivo.isFile()) {
+            if (archivo.isFile() && archivo.getName().toLowerCase(Locale.US).endsWith(".prn")) {
                 listaNombresArchivos.add(archivo.getName());
-            } else {
-                listaNombresArchivos.add("/" + archivo.getName());
+                listaRutasArchivos2.add(listaRutasArchivos.get(i));
             }
         }
 
@@ -123,10 +123,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                File archivo = new File(listaRutasArchivos.get(position));
+                File archivo = new File(listaRutasArchivos2.get(position));
 
                 if(archivo.isFile()) {
-                    if(listaRutasArchivos.get(position).toLowerCase(Locale.US).endsWith(".prm")) {
+                    if(listaRutasArchivos2.get(position).toLowerCase(Locale.US).endsWith(".prn")) {
                         String ubicacion = archivo.getAbsolutePath();
                         String nombre = archivo.getName();
                         Intent i = new Intent(MainActivity.this, VistaPrebia.class);
@@ -159,18 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_iniciarSesion) {
             irIniciarSesion();
-        }
-
-        if (id == R.id.action_buscarDispositivos) {
-            irBuscarDispositivos();
-        }
-
-        if (id == R.id.action_buscarArchivo) {
-            irExplorador();
-        }
-
-        if (id == R.id.action_imprimirArchivo) {
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">App PRM Printer</string>
+    <string name="app_name"> PRN Printer</string>
     <string name="action_buscarDispositivos">Buscar Dispositivos</string>
     <string name="action_buscarArchivo">Buscar Archivo</string>
     <string name="action_imprimirArchivo">Imprimir</string>
     <string name="action_iniciarSesion">Configuración</string>
     <string name="action_salir">Salir</string>
+    <string name="action_cambiarDispositivo">Cambiar Dispositivo</string>
     <string name="title_activity_explorador">Explorador</string>
     <string name="button_connect">Connect</string>
     <string name="button_disconnect">Disconnect</string>
@@ -12,4 +13,7 @@
     <string name="scan">Buscar</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_home_admin">Configuración</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

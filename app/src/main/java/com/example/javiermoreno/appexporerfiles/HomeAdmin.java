@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -20,10 +21,12 @@ import java.io.File;
 public class HomeAdmin extends AppCompatActivity {
 
     EditText rutaDestino, rutaOrigen, claveActual, nuevaClave, confirmacionClave;
-    Button cambiarRutas, cambiaClave;
+    Button cambiarRutas, cambiaClave, cambiarDispositivo;
+    TextView nombreDispositivo, direccionMac;
     public static final String PREFS_NAME = "rutas";
     public static final String PREFS_NAME_CLAVE = "clave";
-    SharedPreferences settings, settingsClave;
+    public static final String PREFS_NAME_MAC = "MAC";
+    SharedPreferences settings, settingsClave, settingsMac;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +35,26 @@ public class HomeAdmin extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.feduro);
+
         settings = getSharedPreferences(PREFS_NAME, 0);
         settingsClave = getSharedPreferences(PREFS_NAME_CLAVE, 0);
+        settingsMac = getSharedPreferences(PREFS_NAME_MAC, 0);
 
         rutaDestino = (EditText) findViewById(R.id.rutaDestino);
         rutaOrigen = (EditText) findViewById(R.id.rutaOrigen);
         claveActual = (EditText) findViewById(R.id.claveActual);
         nuevaClave = (EditText) findViewById(R.id.nuevaClave);
         confirmacionClave = (EditText) findViewById(R.id.confirmacionClave);
+        nombreDispositivo = (TextView) findViewById(R.id.nombreDispositivo);
+        direccionMac = (TextView) findViewById(R.id.direccionMac);
 
         rutaDestino.setText(settings.getString("rutaDestino", "null"));
         rutaOrigen.setText(settings.getString("rutaOrigen", "null"));
 
+        nombreDispositivo.setText(settingsMac.getString("nombreDispositivo", "null"));
+        direccionMac.setText(settingsMac.getString("direccionMac", "null"));
 
         cambiarRutas = (Button) findViewById(R.id.cambiarRutas);
         cambiarRutas.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +112,13 @@ public class HomeAdmin extends AppCompatActivity {
                 }
             }
         });
+
+        cambiarDispositivo = (Button) findViewById(R.id.btnCambiarDispositivo);
+        cambiarDispositivo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                irBuscarDispositivos();
+            }
+        });
     }
 
     @Override
@@ -121,12 +139,21 @@ public class HomeAdmin extends AppCompatActivity {
             irSalir();
         }
 
+        if (id == R.id.action_cambiarDispositivo) {
+            irBuscarDispositivos();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     public void irSalir(){
         this.finish();
         Intent i = new Intent(HomeAdmin.this, LoginActivity.class);
+        startActivity(i);
+    }
+
+    public void irBuscarDispositivos(){
+        Intent i = new Intent(this, ListActivity.class);
         startActivity(i);
     }
 }

@@ -1,19 +1,24 @@
 package com.example.javiermoreno.appexporerfiles;
 
 import android.content.Intent;
-        import android.os.Bundle;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.Toolbar;
-        import android.view.View;
-        import android.view.Menu;
-        import android.view.MenuItem;
-        import android.widget.Button;
-import android.widget.NumberPicker;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-        import java.io.BufferedReader;
-        import java.io.File;
-        import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VistaPrebia extends AppCompatActivity {
     Button btnBuscar;
@@ -23,19 +28,32 @@ public class VistaPrebia extends AppCompatActivity {
     TextView txtTexto;
     String ubicacion;
     String nombre;
-    private NumberPicker numberPicker;
+    private Spinner numberCopias;
+
+    public static final String PREFS_NAME_ARCHIVO = "ARCHIVO";
+    SharedPreferences settings;
 
     public void irExplorador(){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
-    public void irBuscarDispositivos(){
-        Intent i = new Intent(this, ListActivity.class);
+    public void irIniciarSesion(){
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
-    @SuppressWarnings("unused")
+    public void irImprimir(){
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("rutaArchivo", ubicacion);
+        editor.putString("cantidadCopias", String.valueOf(numberCopias.getSelectedItem()));
+        editor.commit();
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentPrint fragmentPrint = FragmentPrint.newInstance("Imprimir");
+        fragmentPrint.show(fm, "fragment_fragment_print");
+    }
+
     private void abrirArchivo(){
         try {
             txtUbicacion.setText(ubicacion);
@@ -67,17 +85,32 @@ public class VistaPrebia extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        numberPicker = (NumberPicker) findViewById(R.id.numeroCopias);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.feduro);
 
-        numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(10);
-        numberPicker.setWrapSelectorWheel(true);
-        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
-            }
-        });
+        settings = getSharedPreferences(PREFS_NAME_ARCHIVO, 0);
+
+        numberCopias = (Spinner) findViewById(R.id.numeroCopias);
+
+        List<String> list = new ArrayList<String>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        list.add("7");
+        list.add("8");
+        list.add("9");
+        list.add("10");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        numberCopias.setAdapter(dataAdapter);
+
+        numberCopias.setSelection(1);
 
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnImprimir = (Button) findViewById(R.id.btnImprimir);
@@ -108,7 +141,7 @@ public class VistaPrebia extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_vista_prebia, menu);
         return true;
     }
 
@@ -120,8 +153,9 @@ public class VistaPrebia extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_buscarDispositivos) {
-            irBuscarDispositivos();
+
+        if (id == R.id.action_iniciarSesion) {
+            irIniciarSesion();
         }
 
         if (id == R.id.action_buscarArchivo) {
@@ -129,9 +163,13 @@ public class VistaPrebia extends AppCompatActivity {
         }
 
         if (id == R.id.action_imprimirArchivo) {
-            return true;
+            irImprimir();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Imprimir(View view){
+        irImprimir();
     }
 }

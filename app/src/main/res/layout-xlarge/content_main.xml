@@ -87,16 +87,6 @@
         android:layout_marginLeft="34dp"
         android:layout_marginStart="34dp" />
 
-    <NumberPicker
-        android:id="@+id/numeroCopias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
-        android:layout_below="@+id/scrollView1"
-        android:layout_toRightOf="@+id/textView11"
-        android:layout_toEndOf="@+id/textView11" />
-
     <Button
         android:text="Imprimir"
         android:layout_width="wrap_content"
@@ -105,9 +95,20 @@
         android:visibility="visible"
         android:drawableLeft="@android:drawable/ic_menu_gallery"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/numeroCopias"
-        android:layout_toEndOf="@+id/numeroCopias"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp" />
+        android:layout_toLeftOf="@+id/btnBuscar"
+        android:layout_toStartOf="@+id/btnBuscar"
+        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp" />
+
+    <Spinner
+        android:id="@+id/numeroCopias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11">
+    </Spinner>
 
 </RelativeLayout>

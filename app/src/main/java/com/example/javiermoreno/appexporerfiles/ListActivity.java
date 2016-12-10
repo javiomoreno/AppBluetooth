@@ -35,6 +35,9 @@ public class ListActivity extends AppCompatActivity implements DeviceListFragmen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.feduro);
+
         //TODO Check if bluetooth is enabled
 
         FragmentManager fragmentManager = getSupportFragmentManager();

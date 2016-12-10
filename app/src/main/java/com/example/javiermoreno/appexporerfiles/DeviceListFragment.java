@@ -1,15 +1,22 @@
 package com.example.javiermoreno.appexporerfiles;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.IOException;
@@ -37,6 +45,9 @@ import java.util.UUID;
  * interface.
  */
 public class DeviceListFragment extends Fragment implements AbsListView.OnItemClickListener{
+
+    public static final String PREFS_NAME_MAC = "MAC";
+    SharedPreferences settings;
 
     private ArrayList <DeviceItem>deviceItemList;
 
@@ -71,6 +82,8 @@ public class DeviceListFragment extends Fragment implements AbsListView.OnItemCl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        settings = this.getActivity().getSharedPreferences(PREFS_NAME_MAC, 0);
 
         Log.d("DEVICELIST", "Super called for DeviceListFragment onCreate\n");
         deviceItemList = new ArrayList<DeviceItem>();
@@ -151,6 +164,15 @@ public class DeviceListFragment extends Fragment implements AbsListView.OnItemCl
 
         Log.d("DEVICELIST", "onItemClick position: " + position +
                 " id: " + id + " name: " + deviceItemList.get(position).getDeviceName() + "\n");
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("direccionMac", deviceItemList.get(position).getAddress());
+        editor.putString("nombreDispositivo", deviceItemList.get(position).getDeviceName());
+        editor.commit();
+
+        FragmentManager fm = getFragmentManager();
+        Confirmacion confirmacion = new Confirmacion();
+        confirmacion.show(fm, "nose");
+
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
@@ -234,6 +256,36 @@ public class DeviceListFragment extends Fragment implements AbsListView.OnItemCl
             }
             return true;
         }
+    }
+
+}
+
+@SuppressLint("ValidFragment")
+class Confirmacion extends DialogFragment {
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new AlertDialog.Builder(getActivity())
+                // set dialog icon
+                .setIcon(android.R.drawable.stat_notify_error)
+                // set Dialog Title
+                .setTitle("Cambiar Dispositivo de Impresión")
+                // Set Dialog Message
+                .setMessage("¿Seguro desea utilizar este dispositivo de impresión?")
+
+                // positive button
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getContext(), HomeAdmin.class);
+                        startActivity(i);
+                    }
+                })
+                // negative button
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create();
     }
 
 }
