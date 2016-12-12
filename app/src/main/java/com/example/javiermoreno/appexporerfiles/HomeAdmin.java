@@ -21,7 +21,7 @@ import java.io.File;
 public class HomeAdmin extends AppCompatActivity {
 
     EditText rutaDestino, rutaOrigen, claveActual, nuevaClave, confirmacionClave;
-    Button cambiarRutas, cambiaClave, cambiarDispositivo;
+    Button cambiarRutas, cambiaClave, cambiarDispositivo, buscarOrigen, buscarDestino;
     TextView nombreDispositivo, direccionMac;
     public static final String PREFS_NAME = "rutas";
     public static final String PREFS_NAME_CLAVE = "clave";
@@ -50,43 +50,15 @@ public class HomeAdmin extends AppCompatActivity {
         nombreDispositivo = (TextView) findViewById(R.id.nombreDispositivo);
         direccionMac = (TextView) findViewById(R.id.direccionMac);
 
+        if(!settings.getString("rutaDestino", "null").equals(settings.getString("rutaDestinoTemp", "null"))){
+
+        }
+
         rutaDestino.setText(settings.getString("rutaDestino", "null"));
         rutaOrigen.setText(settings.getString("rutaOrigen", "null"));
 
         nombreDispositivo.setText(settingsMac.getString("nombreDispositivo", "null"));
         direccionMac.setText(settingsMac.getString("direccionMac", "null"));
-
-        cambiarRutas = (Button) findViewById(R.id.cambiarRutas);
-        cambiarRutas.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(!rutaOrigen.getText().toString().equals(settings.getString("rutaOrigen", "null"))){
-                    File directorioActual = new File(rutaOrigen.getText().toString());
-                    File[] listaArchivos = directorioActual.listFiles();
-                    if (listaArchivos != null) {
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("rutaOrigen", rutaOrigen.getText().toString());
-                        editor.commit();
-                        Toast.makeText(HomeAdmin.this, "Ruta Origen cambiado con Éxito", Toast.LENGTH_SHORT).show();
-                    } else {
-                        rutaOrigen.setText(settings.getString("rutaOrigen", "null"));
-                        Toast.makeText(HomeAdmin.this, "Ruta Origen no Existe", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                if(!rutaDestino.getText().toString().equals(settings.getString("rutaDestino", "null"))){
-                    File directorioActual = new File(rutaDestino.getText().toString());
-                    File[] listaArchivos = directorioActual.listFiles();
-                    if (listaArchivos != null) {
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("rutaDestino", rutaDestino.getText().toString());
-                        editor.commit();
-                        Toast.makeText(HomeAdmin.this, "Ruta Destino cambiado con Éxito", Toast.LENGTH_SHORT).show();
-                    } else {
-                        rutaDestino.setText(settings.getString("rutaDestino", "null"));
-                        Toast.makeText(HomeAdmin.this, "Ruta Destino no Existe", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
 
         cambiaClave = (Button) findViewById(R.id.btnCambiarClave);
         cambiaClave.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +89,20 @@ public class HomeAdmin extends AppCompatActivity {
         cambiarDispositivo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irBuscarDispositivos();
+            }
+        });
+
+        buscarOrigen = (Button) findViewById(R.id.btnBuscarOrigen);
+        buscarOrigen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                irBuscarRuta("origen");
+            }
+        });
+
+        buscarDestino = (Button) findViewById(R.id.btnBuscarDestino);
+        buscarDestino.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                irBuscarRuta("destino");
             }
         });
     }
@@ -154,6 +140,13 @@ public class HomeAdmin extends AppCompatActivity {
 
     public void irBuscarDispositivos(){
         Intent i = new Intent(this, ListActivity.class);
+        startActivity(i);
+    }
+
+    public void irBuscarRuta(String ruta){
+        this.finish();
+        Intent i = new Intent(this, BuscarRuta.class);
+        i.putExtra("ruta", ruta);
         startActivity(i);
     }
 }

@@ -1,12 +1,21 @@
 package com.example.javiermoreno.appexporerfiles;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,8 +30,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import datamaxoneil.connection.ConnectionBase;
 import datamaxoneil.connection.Connection_Bluetooth;
@@ -39,6 +57,9 @@ public class FragmentPrint extends DialogFragment {
 
     public static final String PREFS_NAME_ARCHIVO = "ARCHIVO";
     SharedPreferences settings2;
+
+    public static final String PREFS_NAME = "rutas";
+    SharedPreferences settings3;
 
     private Spinner lenguajePrinter;
     private Button btnPrint;
@@ -81,6 +102,7 @@ public class FragmentPrint extends DialogFragment {
 
         settings = this.getActivity().getSharedPreferences(PREFS_NAME_MAC, 0);
         settings2 = this.getActivity().getSharedPreferences(PREFS_NAME_ARCHIVO, 0);
+        settings3 = this.getActivity().getSharedPreferences(PREFS_NAME, 0);
 
         lenguajePrinter = (Spinner) general.findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
@@ -103,7 +125,7 @@ public class FragmentPrint extends DialogFragment {
         nombreDispositivo.setText(settings.getString("nombreDispositivo", "null"));
 
         nombreArchivo = (TextView) general.findViewById(R.id.nombreArchivo);
-        nombreArchivo.setText(settings2.getString("rutaArchivo", "null"));
+        nombreArchivo.setText(settings2.getString("nombreArchivo", "null"));
 
         cantidadCopias = (TextView) general.findViewById(R.id.cantidadCopias);
         cantidadCopias.setText(settings2.getString("cantidadCopias", "null"));
@@ -128,23 +150,29 @@ public class FragmentPrint extends DialogFragment {
 
         //lenguajePrinter = (Spinner)getView().findViewById(R.id.spinner);
         //etMAC = (TextView) getView().findViewById(R.id.etMAC);
-        btnPrint = (Button) general.findViewById(R.id.button);
+        btnPrint = (Button) general.findViewById(R.id.btnImprimirArchivo);
 
         btnPrint.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                ImprimirArchivo();
+            }
 
+        });
 
-                //guardamos la mac en mprinteraddress
-                m_printerAddress = etMAC.getText().toString();
+    }
 
-                //  sms("Clic a boton imprimir: " +
-                //         "\n" + String.valueOf(lenguajePrinter.getSelectedItem()) + "\n" + "MAC: "+etMAC.getText());
+    public void ImprimirArchivo(){
+        //guardamos la mac en mprinteraddress
+        m_printerAddress = etMAC.getText().toString();
 
-                if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("EZ")) {
-                    //sms("le dio a imprimir y EZ");
-                    docEZ.clear();
+        //  sms("Clic a boton imprimir: " +
+        //         "\n" + String.valueOf(lenguajePrinter.getSelectedItem()) + "\n" + "MAC: "+etMAC.getText());
+
+        if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("EZ")) {
+            //sms("le dio a imprimir y EZ");
+                    /*docEZ.clear();
 
                     //=============ESTO ES UNA PAGINA DE PRUEBA====================================//
                     docEZ.writeText("For Delivery", 1, 200);
@@ -169,54 +197,54 @@ public class FragmentPrint extends DialogFragment {
                     docEZ.writeText("    215       Mini Wonder Ube Cheese       171     179 ", 505, 1);
                     docEZ.writeText("    216       Mini Wonder Ube Mocha        179     100 ", 530, 1);
                     docEZ.writeText("  ", 580, 1);
-                    printData = docEZ.getDocumentData();
-                    //======================================================================//
+                    printData = docEZ.getDocumentData();*/
+            //======================================================================//
 
                     /* IMPIRMIR EL ARCHIVO SELECCIONADO
                     * */
-                /*
-                    String selectedItem = "RUTAAAAAAAAAAAAAAAAAAAAAAA ARCHIVOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-                    Bitmap anImage = null;
-                    //Check if item is an image
-                    String[] okFileExtensions = new String[]{".jpg", ".png", ".gif", ".jpeg", ".bmp", ".tif", ".tiff", ".pcx"};
-                    for (String extension : okFileExtensions) {
-                        if (selectedItem.toLowerCase(Locale.US).endsWith(extension)) {
-                            anImage = BitmapFactory.decodeFile(selectedItem);
-                            break;
-                        }
-                    }
-                    //selected item is not an image file
-                    if (anImage == null) {
-                        File file = new File(selectedItem);
-                        byte[] readBuffer = new byte[(int) file.length()];
-                        InputStream inputStream = null;
-                        try {
-                            inputStream = new BufferedInputStream(new FileInputStream(file));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            inputStream.read(readBuffer);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        printData = readBuffer;
-                    } else {
-                        sms("Processing image...");
-                        docLP.clear();
-                        docLP.writeImage(anImage, 576);
-                        printData = docLP.getDocumentData();
-                    }
-                    */
 
-                } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("LP")) {
-                    //sms("le dio a imprimir y LP");
-                    docLP.clear();
+            String selectedItem = settings2.getString("rutaArchivo", "null");
+            Bitmap anImage = null;
+            //Check if item is an image
+            String[] okFileExtensions = new String[]{".jpg", ".png", ".gif", ".jpeg", ".bmp", ".tif", ".tiff", ".pcx"};
+            for (String extension : okFileExtensions) {
+                if (selectedItem.toLowerCase(Locale.US).endsWith(extension)) {
+                    anImage = BitmapFactory.decodeFile(selectedItem);
+                    break;
+                }
+            }
+            //selected item is not an image file
+            if (anImage == null) {
+                File file = new File(selectedItem);
+                byte[] readBuffer = new byte[(int) file.length()];
+                InputStream inputStream = null;
+                try {
+                    inputStream = new BufferedInputStream(new FileInputStream(file));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.read(readBuffer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                printData = readBuffer;
+            } else {
+                sms("Processing image...");
+                docLP.clear();
+                docLP.writeImage(anImage, 576);
+                printData = docLP.getDocumentData();
+            }
+
+
+        } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("LP")) {
+            //sms("le dio a imprimir y LP");
+                    /*docLP.clear();
 
                     docLP.writeText("                   For Delivery");
                     docLP.writeText(" ");
@@ -242,51 +270,56 @@ public class FragmentPrint extends DialogFragment {
                     docLP.writeText("    216        Mini Wonder Ube Mocha         179    100  ");
                     docLP.writeText("  ");
                     docLP.writeText("  ");
-                    printData = docLP.getDocumentData();
+                    printData = docLP.getDocumentData();*/
 
                     /* IMPIRMIR EL ARCHIVO SELECCIONADO
                     * */
-                    /*
-                    String selectedItem = "RUTAAAAAAAAAAAAAAAAAAAAAAA ARCHIVOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-                    Bitmap anImage = null;
-                    //Check if item is an image
-                    String[] okFileExtensions =  new String[] {".jpg", ".png", ".gif",".jpeg",".bmp", ".tif", ".tiff",".pcx"};
-                    for (String extension : okFileExtensions) {
-                        if(selectedItem.toLowerCase().endsWith(extension))
-                        {
-                            anImage = BitmapFactory.decodeFile(selectedItem);
-                            break;
-                        }
-                    }
-                    //selected item is not an image file
-                    if (anImage == null)
-                    {
-                        File file = new File(selectedItem);
-                        byte[] readBuffer = new byte[(int)file.length()];
-                        InputStream inputStream= new BufferedInputStream(new FileInputStream(file));
-                        try {
-                            inputStream.read(readBuffer);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        printData = readBuffer;
-                    }
-                    else
-                    {
-                        sms("Processing image..");
-                        docLP.writeImage(anImage, 576);
-                        printData = docLP.getDocumentData();
-                    }
-                    */
 
-                } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("DPL")) {
-                    //sms("le dio a imprimir y DPL");
-                    docDPL.clear();
+            String selectedItem = settings2.getString("rutaArchivo", "null");
+            Bitmap anImage = null;
+            //Check if item is an image
+            String[] okFileExtensions =  new String[] {".jpg", ".png", ".gif",".jpeg",".bmp", ".tif", ".tiff",".pcx"};
+            for (String extension : okFileExtensions) {
+                if(selectedItem.toLowerCase().endsWith(extension))
+                {
+                    anImage = BitmapFactory.decodeFile(selectedItem);
+                    break;
+                }
+            }
+            //selected item is not an image file
+            if (anImage == null)
+            {
+                File file = new File(selectedItem);
+                byte[] readBuffer = new byte[(int)file.length()];
+                InputStream inputStream= null;
+                try {
+                    inputStream = new BufferedInputStream(new FileInputStream(file));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.read(readBuffer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                printData = readBuffer;
+            }
+            else
+            {
+                sms("Processing image..");
+                docLP.writeImage(anImage, 576);
+                printData = docLP.getDocumentData();
+            }
+
+
+        } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("DPL")) {
+            //sms("le dio a imprimir y DPL");
+                    /*docDPL.clear();
 
                     docDPL.writeTextInternalBitmapped("Hello World", 1, 5, 5);
                     //write normal ASCII Text Scalable
@@ -299,78 +332,79 @@ public class FragmentPrint extends DialogFragment {
                     paramDPL.setFontHeight(12);
                     paramDPL.setFontWidth(12);
                     docDPL.writeTextScalable("AC00AE370000", "50", 75, 5, paramDPL);
-                    printData = docDPL.getDocumentData();
+                    printData = docDPL.getDocumentData();*/
 
 
 
                     /* IMPIRMIR EL ARCHIVO SELECCIONADO
                     * */
-                    /*
-                    boolean isImage = false;
-                    String selectedItem = "RUTAAAAAAAAAAAAAAAAAAAAAAA ARCHIVOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
-                    //Check if item is an image
-                    String[] okFileExtensions =  new String[] {".jpg", ".png", ".gif",".jpeg",".bmp", ".tif", ".tiff",".pcx"};
-                    for (String extension : okFileExtensions) {
-                        if(selectedItem.toLowerCase(Locale.US).endsWith(extension))
-                        {
-                            isImage = true;
-                            break;
-                        }
-                    }
-                    //selected item is not an image file
-                    if (!isImage)
-                    {
-                        File file = new File(selectedItem);
-                        byte[] readBuffer = new byte[(int)file.length()];
-                        InputStream inputStream= new BufferedInputStream(new FileInputStream(file));
-                        try {
-                            inputStream.read(readBuffer);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        printData = readBuffer;
 
-                    }
-                    else
-                    {
-                        sms("Processing image..");
-                        DocumentDPL.ImageType imgType = DocumentDPL.ImageType.Other;
-                        if(selectedItem.endsWith(".pcx")|| selectedItem.endsWith(".PCX"))
-                        {
-                            imgType = DocumentDPL.ImageType.PCXFlipped_8Bit;
-                        }
-                        else
-                        {
-                            imgType = DocumentDPL.ImageType.Other;
-                        }
-                        docDPL.clear();
-                        try {
-                            docDPL.writeImage(selectedItem, imgType, 0, 0, paramDPL);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        printData = docDPL.getDocumentImageData();
-                    }//end else
-
-                    */
-
-                } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("ExPCL Line Print")) {
-                    sms("no esta soportado");
-                } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("ExPCL Page Print")) {
-                    sms("no esta soportado");
+            boolean isImage = false;
+            String selectedItem = settings2.getString("rutaArchivo", "null");
+            //Check if item is an image
+            String[] okFileExtensions =  new String[] {".jpg", ".png", ".gif",".jpeg",".bmp", ".tif", ".tiff",".pcx"};
+            for (String extension : okFileExtensions) {
+                if(selectedItem.toLowerCase(Locale.US).endsWith(extension))
+                {
+                    isImage = true;
+                    break;
                 }
-
-                Hilo objH = new Hilo();
-                objH.run();
+            }
+            //selected item is not an image file
+            if (!isImage)
+            {
+                File file = new File(selectedItem);
+                byte[] readBuffer = new byte[(int)file.length()];
+                InputStream inputStream= null;
+                try {
+                    inputStream = new BufferedInputStream(new FileInputStream(file));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.read(readBuffer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                printData = readBuffer;
 
             }
+            else
+            {
+                sms("Processing image..");
+                DocumentDPL.ImageType imgType = DocumentDPL.ImageType.Other;
+                if(selectedItem.endsWith(".pcx")|| selectedItem.endsWith(".PCX"))
+                {
+                    imgType = DocumentDPL.ImageType.PCXFlipped_8Bit;
+                }
+                else
+                {
+                    imgType = DocumentDPL.ImageType.Other;
+                }
+                docDPL.clear();
+                try {
+                    docDPL.writeImage(selectedItem, imgType, 0, 0, paramDPL);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                printData = docDPL.getDocumentImageData();
+            }//end else
 
-        });
+
+
+        } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("ExPCL Line Print")) {
+            sms("no esta soportado");
+        } else if (String.valueOf(lenguajePrinter.getSelectedItem()).equals("ExPCL Page Print")) {
+            sms("no esta soportado");
+        }
+
+        Hilo objH = new Hilo();
+        objH.run();
 
     }
 
@@ -410,6 +444,10 @@ public class FragmentPrint extends DialogFragment {
                 //signals to close connection
                 conn.close();
                 sms("Print success.");
+
+                FragmentManager fm = getFragmentManager();
+                ConfirmacionMover confirmacion = new ConfirmacionMover();
+                confirmacion.show(fm, "nose");
                 // EnableControls(true);
 
             } catch (Exception e) {
@@ -418,14 +456,52 @@ public class FragmentPrint extends DialogFragment {
                 if (conn != null)
                     conn.close();
                 e.printStackTrace();
-                sms("ERROOOOOOOOOOR: " + e.getMessage());
+                sms("ERROR: " + e.getMessage());
+
                 //sms(e.getMessage(),"Application Error");
                 // EnableControls(true);
             }
         }   // run()
 
+
+
     }
 
+    public void moverArchivo() {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            File dir = new File (settings3.getString("rutaDestino", "null"));
+            if (!dir.exists())
+            {
+                dir.mkdirs();
+            }
+            in = new FileInputStream(settings3.getString("rutaOrigen", "null") + settings3.getString("nombre", "null"));
+            out = new FileOutputStream(settings3.getString("rutaDestino", "null") + settings3.getString("nombre", "null"));
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+
+            out.flush();
+            out.close();
+            out = null;
+
+            new File(settings3.getString("rutaOrigen", "null") + settings3.getString("nombre", "null")).delete();
+            sms("File moved.");
+        }
+
+        catch (FileNotFoundException fnfe1) {
+            Log.e("tag", fnfe1.getMessage());
+        }
+        catch (Exception e) {
+            Log.e("tag", e.getMessage());
+        }
+    }
 
 
 }
@@ -446,5 +522,34 @@ class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener
 
     }
 
+}
+
+@SuppressLint("ValidFragment")
+class ConfirmacionMover extends DialogFragment {
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new AlertDialog.Builder(getActivity())
+                // set dialog icon
+                .setIcon(android.R.drawable.stat_notify_error)
+                // set Dialog Title
+                .setTitle("Confirmar Impresión")
+                // Set Dialog Message
+                .setMessage("¿Desea imprimir de nuevo el archivo?")
+
+                // positive button
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        new FragmentPrint().ImprimirArchivo();
+                    }
+                })
+                // negative button
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        new FragmentPrint().moverArchivo();
+                     }
+                }).create();
+    }
 
 }
+

@@ -17,7 +17,7 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textNombre"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -56,36 +56,8 @@
                 android:textSize="18sp"
                 android:layout_below="@+id/view"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal" />
-
-            <TextView
-                android:text="Ruta Destino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView4"
-                android:layout_below="@+id/claveActual"
-                android:layout_alignLeft="@+id/claveActual"
-                android:layout_alignStart="@+id/claveActual"
-                android:layout_marginLeft="50dp"
-                android:textSize="18sp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_input_tablet"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_below="@+id/textView4"
-                android:layout_alignLeft="@+id/textView4"
-                android:layout_alignStart="@+id/textView4"
                 android:layout_marginTop="10dp"
-                android:id="@+id/rutaDestino"
-                android:background="@drawable/black"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"/>
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:text="Ruta Origen"
@@ -95,36 +67,82 @@
                 android:id="@+id/textView3"
                 android:layout_below="@+id/view"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="50dp"
-                android:textSize="18sp" />
+                android:layout_alignParentStart="true" />
 
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_input_tablet"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/rutaOrigen"
-                android:layout_below="@+id/textView5"
-                android:layout_alignLeft="@+id/rutaDestino"
-                android:layout_alignStart="@+id/rutaDestino"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/black"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"/>
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <Button
-                android:text="Cambiar"
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_input_tablet"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/rutaOrigen"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/black"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textSize="14sp"
+                    android:layout_toLeftOf="@+id/btnBuscarOrigen"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBuscarOrigen"
+                    android:text="Buscar"
+                    android:layout_gravity="right|end"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+
+
+            <TextView
+                android:text="Ruta Destino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cambiarRutas"
-                android:layout_below="@+id/rutaDestino"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:gravity="center_horizontal|center"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/textView4"
+                android:layout_below="@+id/claveActual"
+                android:layout_alignLeft="@+id/claveActual"
+                android:layout_alignStart="@+id/claveActual" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_input_tablet"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/rutaDestino"
+                    android:background="@drawable/black"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textSize="14sp"
+                    android:layout_toLeftOf="@+id/btnBuscarDestino"
+                    android:layout_toStartOf="@+id/btnBuscarDestino" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBuscarDestino"
+                    android:text="Buscar"
+                    android:layout_gravity="right|end"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
 
             <View
                 android:id="@+id/view2"
@@ -133,7 +151,7 @@
                 android:background="#000"
                 android:elevation="1dp"
                 android:layout_below="@+id/cambiarRutas"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -145,7 +163,7 @@
                 android:textSize="18sp"
                 android:layout_below="@+id/view2"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -156,12 +174,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/textView10"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="50dp"
-                android:textSize="18sp" />
+                android:layout_alignParentStart="true" />
 
             <EditText
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:ems="10"
                 android:layout_marginTop="10dp"
                 android:id="@+id/claveActual"
@@ -169,11 +186,9 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/black"
                 android:layout_height="@dimen/dimen_input_tablet"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
-                android:inputType="textPassword" />
+                android:textSize="14sp" />
 
             <TextView
                 android:text="Nueva Clave"
@@ -183,9 +198,7 @@
                 android:layout_below="@+id/rutaOrigen"
                 android:layout_alignLeft="@+id/nuevaClave"
                 android:layout_alignStart="@+id/nuevaClave"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:textSize="18sp" />
+                android:layout_marginTop="10dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -198,10 +211,9 @@
                 android:layout_alignStart="@+id/rutaOrigen"
                 android:layout_marginTop="11dp"
                 android:background="@drawable/black"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
                 android:paddingLeft="2dp"
-                android:paddingRight="2dp"/>
+                android:paddingRight="2dp"
+                android:textSize="14sp" />
 
             <TextView
                 android:text="Confirmación de clave"
@@ -211,9 +223,7 @@
                 android:layout_below="@+id/nuevaClave"
                 android:layout_alignLeft="@+id/confirmacionClave"
                 android:layout_alignStart="@+id/confirmacionClave"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:textSize="18sp" />
+                android:layout_marginTop="10dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -226,10 +236,9 @@
                 android:layout_alignLeft="@+id/nuevaClave"
                 android:layout_alignStart="@+id/nuevaClave"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
                 android:paddingLeft="2dp"
-                android:paddingRight="2dp"/>
+                android:paddingRight="2dp"
+                android:textSize="14sp" />
 
             <Button
                 android:text="Cambiar"
@@ -242,6 +251,89 @@
                 android:textSize="14sp"
                 android:layout_gravity="center_horizontal" />
 
+            <View
+                android:id="@+id/view22"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000"
+                android:elevation="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Cambiar dispositivo de Impresión"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView12"
+                android:textSize="18sp"
+                android:layout_below="@+id/view2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Nombre:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView51"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="Dispositivo 1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nombreDispositivo"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Dirección Mac:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView51e"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="Dirección Mac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/direccionMac"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:text="Cambiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCambiarDispositivo"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/confirmacionClave"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
     </ScrollView>

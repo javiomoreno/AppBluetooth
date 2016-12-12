@@ -75,18 +75,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:text="Cantidad de copias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView11"
-        android:layout_alignBaseline="@+id/btnImprimir"
-        android:layout_alignBottom="@+id/btnImprimir"
-        android:layout_toRightOf="@+id/textUbicacion"
-        android:layout_toEndOf="@+id/textUbicacion"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp" />
-
     <Button
         android:text="Imprimir"
         android:layout_width="wrap_content"
@@ -102,13 +90,24 @@
 
     <Spinner
         android:id="@+id/numeroCopias"
+        android:layout_width="@android:dimen/app_icon_size"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/spinner_background"
+        android:layout_below="@+id/scrollView1"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_marginLeft="10dp">
+    </Spinner>
+
+    <TextView
+        android:text="Cantidad de copias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp"
-        android:layout_alignBottom="@+id/textView11"
-        android:layout_toRightOf="@+id/textView11"
-        android:layout_toEndOf="@+id/textView11">
-    </Spinner>
+        android:id="@+id/textView11"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/btnImprimir"
+        android:layout_alignBottom="@+id/btnImprimir"
+        android:layout_toRightOf="@+id/textUbicacion"
+        android:layout_toEndOf="@+id/textUbicacion" />
 
 </RelativeLayout>

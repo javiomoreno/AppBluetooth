@@ -60,31 +60,6 @@
                 android:layout_gravity="center_horizontal" />
 
             <TextView
-                android:text="Ruta Destino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView4"
-                android:layout_below="@+id/claveActual"
-                android:layout_alignLeft="@+id/claveActual"
-                android:layout_alignStart="@+id/claveActual" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_input_smatpone"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_below="@+id/textView4"
-                android:layout_alignLeft="@+id/textView4"
-                android:layout_alignStart="@+id/textView4"
-                android:layout_marginTop="10dp"
-                android:id="@+id/rutaDestino"
-                android:background="@drawable/black"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:textSize="14sp" />
-
-            <TextView
                 android:text="Ruta Origen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,31 +69,80 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/rutaOrigen"
-                android:layout_below="@+id/textView5"
-                android:layout_alignLeft="@+id/rutaDestino"
-                android:layout_alignStart="@+id/rutaDestino"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/black"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:textSize="14sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <Button
-                android:text="Cambiar"
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/rutaOrigen"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/black"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textSize="14sp"
+                    android:layout_toLeftOf="@+id/btnBuscarOrigen"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBuscarOrigen"
+                    android:text="Buscar"
+                    android:layout_gravity="right|end"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+
+
+            <TextView
+                android:text="Ruta Destino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cambiarRutas"
-                android:layout_below="@+id/rutaDestino"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:gravity="center_horizontal|center"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/textView4"
+                android:layout_below="@+id/claveActual"
+                android:layout_alignLeft="@+id/claveActual"
+                android:layout_alignStart="@+id/claveActual" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_input_smatpone"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/rutaDestino"
+                    android:background="@drawable/black"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textSize="14sp"
+                    android:layout_toLeftOf="@+id/btnBuscarDestino"
+                    android:layout_toStartOf="@+id/btnBuscarDestino" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBuscarDestino"
+                    android:text="Buscar"
+                    android:layout_gravity="right|end"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
 
             <View
                 android:id="@+id/view2"

@@ -47,6 +47,7 @@ public class VistaPrebia extends AppCompatActivity {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("rutaArchivo", ubicacion);
         editor.putString("cantidadCopias", String.valueOf(numberCopias.getSelectedItem()));
+        editor.putString("nombreArchivo", nombre);
         editor.commit();
 
         FragmentManager fm = getSupportFragmentManager();
